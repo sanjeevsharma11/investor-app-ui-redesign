@@ -84,8 +84,8 @@ export const InstrumentTransactionType = styled.div(
 );
 
 export const InstrumentName = styled.h1`
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   color: #000000;
 `;
 
@@ -235,16 +235,22 @@ export const ExitDate = styled.span`
   color: #294166;
 `;
 
-export const ReactionCount = styled.div`
-  font-size: 10px;
-  font-weight: 500;
-  color: #b5b5b5;
+export const ReactionWrapper = styled.div`
+  ${tw`
+    flex justify-center items-center
+  `}
 `;
 
 export const ReactionList = styled.div`
   ${tw`
     flex justify-center items-center gap-2 mr-8
   `}
+`;
+
+export const ReactionCount = styled.div`
+  font-size: 10px;
+  font-weight: 500;
+  color: #b5b5b5;
 `;
 
 const AnimateReaction = keyframes`

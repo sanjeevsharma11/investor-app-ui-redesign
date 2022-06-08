@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiFillLike } from 'react-icons/ai';
 import { MdDoubleArrow } from 'react-icons/md';
 import { BiRupee } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
@@ -24,6 +24,7 @@ import {
   ReactionCount,
   ReactionIcon,
   ReactionList,
+  ReactionWrapper,
   Reason,
   Row,
   UnlockNowButton,
@@ -73,7 +74,7 @@ const FeedCard = ({ feed }: { feed: IFeed }) => {
           <ExpertName>{feed.name}</ExpertName>
         </ExpertInfoWrapper>
 
-        <BsThreeDots />
+        <BullishOrBerrish>{feed.bullishOrBearish}</BullishOrBerrish>
       </Row>
       {/* intrumnent info */}
       <Row>
@@ -103,18 +104,12 @@ const FeedCard = ({ feed }: { feed: IFeed }) => {
             </>
           )}
         </InstrumentInfoWrapper>
-        <BullishOrBerrish>{feed.bullishOrBearish}</BullishOrBerrish>
-      </Row>
-
-      {/* reason */}
-      <Row>
-        <Reason>{feed.reason}</Reason>
       </Row>
 
       {/* stats card */}
       <FeedStatsWrapper>
         <FeedStatsCard>
-          <FeedStatsTitle>Min Investment</FeedStatsTitle>
+          <FeedStatsTitle>Investment</FeedStatsTitle>
           <FeedStatsValue>
             <img src={MinInvestIcon.src} alt='min investment' />
             {feed.minInvest}
@@ -158,10 +153,15 @@ const FeedCard = ({ feed }: { feed: IFeed }) => {
           </FeedStatsValue>
         </FeedStatsCard>
       </FeedStatsWrapper>
-      {/* reaction and share info */}
 
+      {/* reason */}
       <Row>
-        <Row>
+        <Reason>{feed.reason}</Reason>
+      </Row>
+
+      {/* reaction and share info */}
+      <Row>
+        <ReactionWrapper>
           <ReactionList>
             {feed.reactions.map((reaction) => (
               <ReactionIcon key={reaction._id}>
@@ -169,14 +169,14 @@ const FeedCard = ({ feed }: { feed: IFeed }) => {
               </ReactionIcon>
             ))}
           </ReactionList>
-          <ReactionCount>{feed.reactionCount} Likes</ReactionCount>
-        </Row>
+          <ReactionCount>{feed.reactions.length} Likes</ReactionCount>
+        </ReactionWrapper>
         <PostedOn> Posted {dayjs(feed.createdAt).fromNow()}</PostedOn>
       </Row>
 
       {/* footer - action btn */}
       <Row>
-        <div></div>
+        <AiFillLike />
         {feed.premiumTradeType === 'PAID' ? (
           <UnlockNowButton>
             <span>
